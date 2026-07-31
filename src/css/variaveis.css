@@ -1,0 +1,49 @@
+    :root {
+	/* Tipografia */
+	--fonte-principal: 'Poppins', sans-serif;
+
+	/* Cores gerais */
+	--cor-fundo: #5e5b5bad;
+	--cor-texto: #333333;
+	--cor-fundo-escuro: #212121;
+	--cor-texto-escuro: #ffffff;
+
+	/* Cards */
+	--cor-card: #d8e3ec;
+	--cor-card-escuro: #a8a8a8;
+
+	/* Tipos Pokémon */
+	--cor-grama: #7ac74c;
+	--cor-grama-hover: #96d9d6;
+	--cor-veneno: #df67ddfb;
+	--cor-fogo: #ee8130;
+	--cor-fogo-hover: #ff9900;
+	--cor-agua: #6390f0;
+	--cor-agua-hover: #70cffc;
+	--cor-inseto: #a6b91a;
+	--cor-inseto-hover: #9dff00;
+
+	/* Elementos */
+	--cor-borda: #333333;
+	--cor-scrollbar-trilha: #f1e9e9;
+	--cor-scrollbar: #582965;
+	--cor-scrollbar-borda: #ffffff;
+
+	/* Espaçamento */
+	--espacamento-header: 25px;
+	--espacamento-main: 25px;
+	--espacamento-card: 15px;
+	--espacamento-cards: 30px;
+	--espacamento-tipos: 15px;
+
+	/* Dimensões */
+	--largura-maxima: 1280px;
+	--largura-card: 200px;
+	--tamanho-gif: 90px;
+	--raio-card: 15px;
+	--raio-borda: 10px;
+	--raio-tipo: 10px;
+
+	/* Transições */
+	--transicao-padrao: 0.2s ease-in-out;
+}
