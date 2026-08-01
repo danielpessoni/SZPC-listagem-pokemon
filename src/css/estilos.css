@@ -58,20 +58,20 @@ main .cartao-pokemon {
 	transition: 0.2s ease-in-out;
 }
 
-main li.fogo:hover {
+main li.fire:hover {
 	background-color: #ff9900;
 }
 
-main li.grama:hover {
+main li.grass:hover {
 	background-color: #96d9d6;
 }
 
 
-main li.agua:hover {
+main li.water:hover {
 	background-color: #70cffc;
 }
 
-main li.inseto:hover {
+main li.bug:hover {
 	background-color: #9dff00;
 }
 
@@ -110,23 +110,23 @@ main .cartao-pokemon .tipo {
 	border-radius: 10px;
 }
 
-.grama {
+.grass {
 	background-color: #7ac74c;
 }
 
-.veneno {
+.poison {
 	background-color: #df67ddfb;
 }
 
-.fogo {
+.fire {
 	background-color: #ee8130;
 }
 
-.agua {
+.water {
 	background-color: #6390f0;
 }
 
-.inseto {
+.bug {
 	background-color: #a6b91a;
 }
 

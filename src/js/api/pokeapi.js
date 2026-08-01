@@ -27,3 +27,11 @@ export async function buscarGeracao(identificador) {
 export async function buscarRegiao(identificador) {
 	return buscarDados(`${URL_BASE_API}/region/${identificador}`);
 }
+
+export async function buscarPokedex(identificador) {
+	return buscarDados(`${URL_BASE_API}/pokedex/${identificador}`);
+}
+
+export async function buscarTipo(identificador) {
+    return buscarDados(`${URL_BASE_API}/type/${identificador}`);
+}
