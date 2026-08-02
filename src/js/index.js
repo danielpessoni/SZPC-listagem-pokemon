@@ -17,7 +17,7 @@ botaoAlterarTema.addEventListener("click", () => {
 
 async function iniciar() {
 	try {
-		const pokemons = await consultarPorRegiao("kanto");
+		const pokemons = await consultarPorRegiao(); // ←← insira aqui uma região para testes
 
 		pokemons.forEach((pokemon) => {
 			exibirPokemon(pokemon);

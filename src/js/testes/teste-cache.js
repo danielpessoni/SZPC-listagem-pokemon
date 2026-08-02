@@ -2,7 +2,7 @@ import { consultarPorRegiao } from "../filtros/regiao.js";
 
 console.time("Primeira consulta");
 
-const primeira = await consultarPorRegiao("kanto");
+const primeira = await consultarPorRegiao();
 
 console.timeEnd("Primeira consulta");
 
@@ -12,7 +12,7 @@ console.log(
 
 console.time("Segunda consulta");
 
-const segunda = await consultarPorRegiao("kanto");
+const segunda = await consultarPorRegiao();
 
 console.timeEnd("Segunda consulta");
 
