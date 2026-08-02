@@ -1,6 +1,6 @@
-    :root {
+:root {
 	/* Tipografia */
-	--fonte-principal: 'Poppins', sans-serif;
+	--fonte-principal: "Poppins", sans-serif;
 
 	/* Cores gerais */
 	--cor-fundo: #5e5b5bad;
@@ -13,15 +13,60 @@
 	--cor-card-escuro: #a8a8a8;
 
 	/* Tipos Pokémon */
-	--cor-grama: #7ac74c;
-	--cor-grama-hover: #96d9d6;
-	--cor-veneno: #df67ddfb;
-	--cor-fogo: #ee8130;
-	--cor-fogo-hover: #ff9900;
-	--cor-agua: #6390f0;
-	--cor-agua-hover: #70cffc;
-	--cor-inseto: #a6b91a;
-	--cor-inseto-hover: #9dff00;
+
+	--tipo-normal: #a8a77a;
+	--tipo-normal-hover: #c6c6a7;
+
+	--tipo-fire: #ee8130;
+	--tipo-fire-hover: #ff9900;
+
+	--tipo-water: #6390f0;
+	--tipo-water-hover: #70cffc;
+
+	--tipo-electric: #f7d02c;
+	--tipo-electric-hover: #ffe347;
+
+	--tipo-grass: #7ac74c;
+	--tipo-grass-hover: #96d9d6;
+
+	--tipo-ice: #96d9d6;
+	--tipo-ice-hover: #b8f3f1;
+
+	--tipo-fighting: #c22e28;
+	--tipo-fighting-hover: #de554f;
+
+	--tipo-poison: #a33ea1;
+	--tipo-poison-hover: #c26bc1;
+
+	--tipo-ground: #e2bf65;
+	--tipo-ground-hover: #f0d98f;
+
+	--tipo-flying: #a98ff3;
+	--tipo-flying-hover: #c4b2fa;
+
+	--tipo-psychic: #f95587;
+	--tipo-psychic-hover: #ff7ea7;
+
+	--tipo-bug: #a6b91a;
+	--tipo-bug-hover: #9dff00;
+
+	--tipo-rock: #b6a136;
+	--tipo-rock-hover: #d2bc59;
+
+	--tipo-ghost: #735797;
+	--tipo-ghost-hover: #9074b6;
+
+	--tipo-dragon: #6f35fc;
+	--tipo-dragon-hover: #9162ff;
+
+	--tipo-dark: #705746;
+	--tipo-dark-hover: #8b7260;
+
+	--tipo-steel: #b7b7ce;
+	--tipo-steel-hover: #d0d0e5;
+
+	--tipo-fairy: #d685ad;
+	--tipo-fairy-hover: #f0a7cb;
 
 	/* Elementos */
 	--cor-borda: #333333;
