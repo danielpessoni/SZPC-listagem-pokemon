@@ -1,43 +1,6 @@
-body {
-	font-family: var(--fonte-principal);
-	max-width: var(--largura-maxima);
-	margin: 0 auto;
-	background-color: var(--cor-fundo);
-	color: var(--cor-texto);
-}
-
-body.modo-escuro {
-	background-color: var(--cor-fundo-escuro);
-	color: var(--cor-texto-escuro);
-}
-
-header {
-	display: flex;
-	justify-content: space-between;
-	padding: var(--espacamento-header);
-}
-
-header .logo,
-header .imagem-botao {
-	width: 30px;
-	transition: var(--transicao-padrao);
-}
-
-header #botao-alterar-tema {
-	background: none;
-	border: none;
-}
-
-header .logo:hover,
-header .imagem-botao:hover,
-main .cartao-pokemon:hover {
-	transform: scale(1.05);
-	cursor: pointer;
-}
-
-main {
-	padding: var(--espacamento-main);
-}
+/* ===========================
+   Lista de Pokémon
+=========================== */
 
 main .listagem-pokemon {
 	display: flex;
@@ -45,6 +8,10 @@ main .listagem-pokemon {
 	gap: var(--espacamento-cards);
 	justify-content: center;
 }
+
+/* ===========================
+   Card
+=========================== */
 
 main .cartao-pokemon {
 	background-color: var(--cor-card);
@@ -58,91 +25,103 @@ main .cartao-pokemon {
 	transition: var(--transicao-padrao);
 }
 
-main li.normal:hover {
-	background-color: var(--tipo-normal-hover);
-}
-
-main li.fire:hover {
-	background-color: var(--tipo-fire-hover);
-}
-
-main li.water:hover {
-	background-color: var(--tipo-water-hover);
-}
-
-main li.electric:hover {
-	background-color: var(--tipo-electric-hover);
-}
-
-main li.grass:hover {
-	background-color: var(--tipo-grass-hover);
-}
-
-main li.ice:hover {
-	background-color: var(--tipo-ice-hover);
-}
-
-main li.fighting:hover {
-	background-color: var(--tipo-fighting-hover);
-}
-
-main li.poison:hover {
-	background-color: var(--tipo-poison-hover);
-}
-
-main li.ground:hover {
-	background-color: var(--tipo-ground-hover);
-}
-
-main li.flying:hover {
-	background-color: var(--tipo-flying-hover);
-}
-
-main li.psychic:hover {
-	background-color: var(--tipo-psychic-hover);
-}
-
-main li.bug:hover {
-	background-color: var(--tipo-bug-hover);
-}
-
-main li.rock:hover {
-	background-color: var(--tipo-rock-hover);
-}
-
-main li.ghost:hover {
-	background-color: var(--tipo-ghost-hover);
-}
-
-main li.dragon:hover {
-	background-color: var(--tipo-dragon-hover);
-}
-
-main li.dark:hover {
-	background-color: var(--tipo-dark-hover);
-}
-
-main li.steel:hover {
-	background-color: var(--tipo-steel-hover);
-}
-
-main li.fairy:hover {
-	background-color: var(--tipo-fairy-hover);
+main .cartao-pokemon:hover {
+	transform: scale(1.05);
+	cursor: pointer;
 }
 
 .modo-escuro .cartao-pokemon {
 	background-color: var(--cor-card-escuro);
 }
 
+/* ===========================
+   Hover do card
+=========================== */
+
+main .cartao-pokemon.normal:hover {
+	background-color: var(--tipo-normal-hover);
+}
+
+main .cartao-pokemon.fire:hover {
+	background-color: var(--tipo-fire-hover);
+}
+
+main .cartao-pokemon.water:hover {
+	background-color: var(--tipo-water-hover);
+}
+
+main .cartao-pokemon.electric:hover {
+	background-color: var(--tipo-electric-hover);
+}
+
+main .cartao-pokemon.grass:hover {
+	background-color: var(--tipo-grass-hover);
+}
+
+main .cartao-pokemon.ice:hover {
+	background-color: var(--tipo-ice-hover);
+}
+
+main .cartao-pokemon.fighting:hover {
+	background-color: var(--tipo-fighting-hover);
+}
+
+main .cartao-pokemon.poison:hover {
+	background-color: var(--tipo-poison-hover);
+}
+
+main .cartao-pokemon.ground:hover {
+	background-color: var(--tipo-ground-hover);
+}
+
+main .cartao-pokemon.flying:hover {
+	background-color: var(--tipo-flying-hover);
+}
+
+main .cartao-pokemon.psychic:hover {
+	background-color: var(--tipo-psychic-hover);
+}
+
+main .cartao-pokemon.bug:hover {
+	background-color: var(--tipo-bug-hover);
+}
+
+main .cartao-pokemon.rock:hover {
+	background-color: var(--tipo-rock-hover);
+}
+
+main .cartao-pokemon.ghost:hover {
+	background-color: var(--tipo-ghost-hover);
+}
+
+main .cartao-pokemon.dragon:hover {
+	background-color: var(--tipo-dragon-hover);
+}
+
+main .cartao-pokemon.dark:hover {
+	background-color: var(--tipo-dark-hover);
+}
+
+main .cartao-pokemon.steel:hover {
+	background-color: var(--tipo-steel-hover);
+}
+
+main .cartao-pokemon.fairy:hover {
+	background-color: var(--tipo-fairy-hover);
+}
+
+/* ===========================
+   Informações
+=========================== */
 
 main .cartao-pokemon .informacoes {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 80%;
 	border: 1px solid var(--cor-borda);
 	border-radius: var(--raio-borda);
-	width: 80%;
 }
 
 main .cartao-pokemon .informacoes span {
@@ -151,14 +130,23 @@ main .cartao-pokemon .informacoes span {
 	font-size: 16px;
 	text-align: center;
 }
-main .cartao-pokemon .informacoes p{
+
+main .cartao-pokemon .informacoes p {
 	text-align: center;
 }
+
+/* ===========================
+   GIF
+=========================== */
 
 main .cartao-pokemon .gif {
 	width: var(--tamanho-gif);
 	height: var(--tamanho-gif);
 }
+
+/* ===========================
+   Tipos
+=========================== */
 
 main .cartao-pokemon .tipos {
 	display: flex;
@@ -169,82 +157,90 @@ main .cartao-pokemon .tipo {
 	padding: 8px;
 	border-radius: var(--raio-tipo);
 }
-.normal {
+
+/* ===========================
+   Cores dos tipos
+=========================== */
+
+main .cartao-pokemon .tipo.normal {
 	background-color: var(--tipo-normal);
 }
 
-.fire {
+main .cartao-pokemon .tipo.fire {
 	background-color: var(--tipo-fire);
 }
 
-.water {
+main .cartao-pokemon .tipo.water {
 	background-color: var(--tipo-water);
 }
 
-.electric {
+main .cartao-pokemon .tipo.electric {
 	background-color: var(--tipo-electric);
 }
 
-.grass {
+main .cartao-pokemon .tipo.grass {
 	background-color: var(--tipo-grass);
 }
 
-.ice {
+main .cartao-pokemon .tipo.ice {
 	background-color: var(--tipo-ice);
 }
 
-.fighting {
+main .cartao-pokemon .tipo.fighting {
 	background-color: var(--tipo-fighting);
 }
 
-.poison {
+main .cartao-pokemon .tipo.poison {
 	background-color: var(--tipo-poison);
 }
 
-.ground {
+main .cartao-pokemon .tipo.ground {
 	background-color: var(--tipo-ground);
 }
 
-.flying {
+main .cartao-pokemon .tipo.flying {
 	background-color: var(--tipo-flying);
 }
 
-.psychic {
+main .cartao-pokemon .tipo.psychic {
 	background-color: var(--tipo-psychic);
 }
 
-.bug {
+main .cartao-pokemon .tipo.bug {
 	background-color: var(--tipo-bug);
 }
 
-.rock {
+main .cartao-pokemon .tipo.rock {
 	background-color: var(--tipo-rock);
 }
 
-.ghost {
+main .cartao-pokemon .tipo.ghost {
 	background-color: var(--tipo-ghost);
 }
 
-.dragon {
+main .cartao-pokemon .tipo.dragon {
 	background-color: var(--tipo-dragon);
 }
 
-.dark {
+main .cartao-pokemon .tipo.dark {
 	background-color: var(--tipo-dark);
 }
 
-.steel {
+main .cartao-pokemon .tipo.steel {
 	background-color: var(--tipo-steel);
 }
 
-.fairy {
+main .cartao-pokemon .tipo.fairy {
 	background-color: var(--tipo-fairy);
 }
 
+/* ===========================
+   Descrição
+=========================== */
 
-main .descricao {
+main .cartao-pokemon .descricao {
 	max-height: 80px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	font-size: 14px;
 	padding-right: 10px;
 }

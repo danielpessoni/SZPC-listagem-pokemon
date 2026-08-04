@@ -1,0 +1,47 @@
+body {
+	font-family: var(--fonte-principal);
+	max-width: var(--largura-maxima);
+	margin: 0 auto;
+	background-color: var(--cor-fundo);
+	color: var(--cor-texto);
+}
+
+body.modo-escuro {
+	background-color: var(--cor-fundo-escuro);
+	color: var(--cor-texto-escuro);
+}
+
+/* ===========================
+   Header
+=========================== */
+
+header {
+	display: flex;
+	justify-content: space-between;
+	padding: var(--espacamento-header);
+}
+
+header .logo,
+header .imagem-botao {
+	width: 30px;
+	transition: var(--transicao-padrao);
+}
+
+header #botao-alterar-tema {
+	background: none;
+	border: none;
+}
+
+header .logo:hover,
+header .imagem-botao:hover {
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
+/* ===========================
+   Main
+=========================== */
+
+main {
+	padding: var(--espacamento-main);
+}

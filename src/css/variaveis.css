@@ -1,18 +1,33 @@
 :root {
-	/* Tipografia */
+
+	/* ==========================================================
+	   Tipografia
+	========================================================== */
+
 	--fonte-principal: "Poppins", sans-serif;
 
-	/* Cores gerais */
+	/* ==========================================================
+	   Cores Gerais
+	========================================================== */
+
 	--cor-fundo: #5e5b5bad;
 	--cor-texto: #333333;
+
 	--cor-fundo-escuro: #212121;
 	--cor-texto-escuro: #ffffff;
 
-	/* Cards */
+	/* ==========================================================
+	   Pokémon
+	   Cards
+	========================================================== */
+
 	--cor-card: #d8e3ec;
 	--cor-card-escuro: #a8a8a8;
 
-	/* Tipos Pokémon */
+	/* ==========================================================
+	   Pokémon
+	   Tipos
+	========================================================== */
 
 	--tipo-normal: #a8a77a;
 	--tipo-normal-hover: #c6c6a7;
@@ -68,27 +83,119 @@
 	--tipo-fairy: #d685ad;
 	--tipo-fairy-hover: #f0a7cb;
 
-	/* Elementos */
+	/* ==========================================================
+	   Filtros
+	========================================================== */
+
+	/* Painel */
+
+	--cor-painel-filtros: rgba(255, 255, 255, 0.08);
+	--cor-painel-filtros-escuro: rgba(255, 255, 255, 0.05);
+
+	/* Campo de pesquisa */
+
+	--cor-input: #ffffff;
+	--cor-input-escuro: #2d2d2d;
+
+	/* Chips */
+
+	--cor-chip: rgba(255, 255, 255, 0.12);
+	--cor-chip-hover: rgba(255, 255, 255, 0.22);
+	--cor-chip-borda: rgba(255, 255, 255, 0.28);
+	--cor-chip-sombra: rgba(0, 0, 0, 0.16);
+	--cor-chip-sombra-ativa: rgba(0, 0, 0, 0.24);
+
+	/* Tipos em filtro */
+
+	--tipo-normal-filtro: rgba(168, 167, 122, 0.28);
+	--tipo-fire-filtro: rgba(238, 129, 48, 0.28);
+	--tipo-water-filtro: rgba(99, 144, 240, 0.28);
+	--tipo-grass-filtro: rgba(122, 199, 76, 0.28);
+	--tipo-electric-filtro: rgba(247, 208, 44, 0.28);
+	--tipo-ice-filtro: rgba(150, 217, 214, 0.28);
+	--tipo-fighting-filtro: rgba(194, 46, 40, 0.28);
+	--tipo-poison-filtro: rgba(163, 62, 161, 0.28);
+	--tipo-ground-filtro: rgba(226, 191, 101, 0.28);
+	--tipo-flying-filtro: rgba(169, 143, 243, 0.28);
+	--tipo-psychic-filtro: rgba(249, 85, 135, 0.28);
+	--tipo-bug-filtro: rgba(166, 185, 26, 0.28);
+	--tipo-rock-filtro: rgba(182, 161, 54, 0.28);
+	--tipo-ghost-filtro: rgba(115, 87, 151, 0.28);
+	--tipo-dragon-filtro: rgba(111, 53, 252, 0.28);
+	--tipo-dark-filtro: rgba(112, 87, 70, 0.28);
+	--tipo-steel-filtro: rgba(183, 183, 206, 0.28);
+	--tipo-fairy-filtro: rgba(214, 133, 173, 0.28);
+	--cor-regiao-filtro: rgba(63, 122, 214, 0.28);
+
+	/* Região selecionada */
+
+	--cor-regiao: #3f7ad6;
+	--cor-regiao-hover: #4b8af0;
+
+	/* Divisores */
+
+	--cor-divisor: rgba(0, 0, 0, 0.25);
+
+	/* Botão */
+
+	--cor-botao-filtrar: var(--tipo-water);
+	--cor-botao-filtrar-hover: var(--tipo-water-hover);
+
+	/* ==========================================================
+	   Elementos
+	========================================================== */
+
 	--cor-borda: #333333;
+
 	--cor-scrollbar-trilha: #f1e9e9;
 	--cor-scrollbar: #582965;
 	--cor-scrollbar-borda: #ffffff;
 
-	/* Espaçamento */
+	/* ==========================================================
+	   Espaçamentos
+	========================================================== */
+
 	--espacamento-header: 25px;
 	--espacamento-main: 25px;
+
 	--espacamento-card: 15px;
 	--espacamento-cards: 30px;
+
 	--espacamento-tipos: 15px;
 
-	/* Dimensões */
+	--espacamento-filtros: 20px;
+	--espacamento-grupo-filtro: 15px;
+	--espacamento-chip: 6px;
+	--espacamento-divisor: 10px;
+
+	/* ==========================================================
+	   Dimensões
+	========================================================== */
+
 	--largura-maxima: 1280px;
+
 	--largura-card: 200px;
+
 	--tamanho-gif: 90px;
+
 	--raio-card: 15px;
 	--raio-borda: 10px;
 	--raio-tipo: 10px;
 
-	/* Transições */
+	--altura-input: 42px;
+	--altura-chip: 28px;
+
+	/* ==========================================================
+	   Transições
+	========================================================== */
+
 	--transicao-padrao: 0.2s ease-in-out;
+	--transicao-lenta: 0.35s ease-in-out;
+
+	/* ==========================================================
+	   Divisor
+	========================================================== */
+
+	--cor-divisor-filtro: rgba(0, 0, 0, 0.25);
+	--cor-divisor-filtro-ativo: rgba(0, 0, 0, 0.65);
 }

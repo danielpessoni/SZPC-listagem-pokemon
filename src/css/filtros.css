@@ -1,0 +1,390 @@
+/* ==========================================================
+   Painel de filtros
+========================================================== */
+
+.painel-filtros {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-filtros);
+    margin-bottom: var(--espacamento-main);
+    padding: var(--espacamento-filtros);
+    background-color: var(--cor-painel-filtros);
+    border-radius: var(--raio-card);
+}
+
+/* ==========================================================
+   Grupos
+========================================================== */
+
+.grupo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-grupo-filtro);
+}
+
+.grupo-filtro h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================
+   Campo de pesquisa
+========================================================== */
+
+.pesquisa-pokemon {
+    width: 100%;
+    height: var(--altura-input);
+    padding: 0 15px;
+    background-color: var(--cor-input);
+    border: none;
+    border-radius: var(--raio-borda);
+    font-family: var(--fonte-principal);
+    font-size: 16px;
+    transition: var(--transicao-padrao);
+}
+
+.pesquisa-pokemon:focus {
+    outline: none;
+    transform: scale(1.01);
+}
+
+/* ==========================================================
+   Lista de opções
+========================================================== */
+
+.lista-opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+/* ==========================================================
+   Opção individual
+========================================================== */
+
+.opcao-filtro {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.opcao-filtro > input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==========================================================
+   Botão visual
+========================================================== */
+
+.botao-opcao, .botao-filtrar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-height: var(--altura-chip);
+    padding: 8px 20px;
+    margin-right: -12px; 
+    
+    background-color: var(--cor-chip);
+    border: 1px solid var(--cor-chip-borda);
+    border-radius: 0;
+
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, .35);
+
+    transition: var(--transicao-padrao);
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, .35),
+        inset 0 -3px 0 rgba(0, 0, 0, .18),
+        0 6px 0 var(--cor-chip-sombra);
+}
+
+
+/* prisma */
+
+.botao-opcao::after, .botao-filtrar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.06),
+            rgba(0,0,0,.06)
+        );
+    transform: skewX(-24deg);
+    z-index: 1;
+    pointer-events: none;
+    box-shadow: 2px 0 0 var(--cor-chip-borda);
+}
+
+/* ==========================================================
+   Estados
+========================================================== */
+
+.opcao-filtro:hover .botao-opcao {
+    transform: translateY(-3px);
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.35),
+        inset 0 -3px 0 rgba(0,0,0,.18),
+        0 8px 0 var(--cor-chip-sombra);
+}
+
+.opcao-filtro input:checked + .botao-opcao {
+    transform: translateY(2px);
+
+    color: #ffffff;
+
+    box-shadow:
+        inset 0 2px 0 rgba(0,0,0,.22),
+        inset 0 -1px 0 rgba(255,255,255,.20),
+        0 2px 0 var(--cor-chip-sombra-ativa);
+}
+
+/* ==========================================================
+   Divisores
+========================================================== */
+
+.divisor {
+    margin-left: -8px;
+    padding: 0 6px;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    color: var(--cor-divisor-filtro);
+
+    transition: var(--transicao-padrao);
+
+    pointer-events: none;
+}
+
+.opcao-filtro input:checked ~ .divisor {
+    color: var(--cor-divisor-filtro-ativo);
+}
+
+/* ==========================================================
+   Tipos Pokémon
+========================================================== */
+
+.botao-opcao.normal {
+    background-color: var(--tipo-normal-filtro);
+}
+
+.botao-opcao.fire {
+    background-color: var(--tipo-fire-filtro);
+}
+
+.botao-opcao.water {
+    background-color: var(--tipo-water-filtro);
+}
+
+.botao-opcao.grass {
+    background-color: var(--tipo-grass-filtro);
+}
+
+.botao-opcao.electric {
+    background-color: var(--tipo-electric-filtro);
+}
+
+.botao-opcao.ice {
+    background-color: var(--tipo-ice-filtro);
+}
+
+.botao-opcao.fighting {
+    background-color: var(--tipo-fighting-filtro);
+}
+
+.botao-opcao.poison {
+    background-color: var(--tipo-poison-filtro);
+}
+
+.botao-opcao.ground {
+    background-color: var(--tipo-ground-filtro);
+}
+
+.botao-opcao.flying {
+    background-color: var(--tipo-flying-filtro);
+}
+
+.botao-opcao.psychic {
+    background-color: var(--tipo-psychic-filtro);
+}
+
+.botao-opcao.bug {
+    background-color: var(--tipo-bug-filtro);
+}
+
+.botao-opcao.rock {
+    background-color: var(--tipo-rock-filtro);
+}
+
+.botao-opcao.ghost {
+    background-color: var(--tipo-ghost-filtro);
+}
+
+.botao-opcao.dragon {
+    background-color: var(--tipo-dragon-filtro);
+}
+
+.botao-opcao.dark {
+    background-color: var(--tipo-dark-filtro);
+}
+
+.botao-opcao.steel {
+    background-color: var(--tipo-steel-filtro);
+}
+
+.botao-opcao.fairy {
+    background-color: var(--tipo-fairy-filtro);
+}
+
+.botao-opcao.regiao {
+    background-color: var(--cor-regiao-filtro);
+}
+
+
+/* ==========================================================
+   Tipos selecionados
+========================================================== */
+
+.opcao-filtro input:checked + .botao-opcao.normal {
+    background-color: var(--tipo-normal);
+}
+
+.opcao-filtro input:checked + .botao-opcao.fire {
+    background-color: var(--tipo-fire);
+}
+
+.opcao-filtro input:checked + .botao-opcao.water {
+    background-color: var(--tipo-water);
+}
+
+.opcao-filtro input:checked + .botao-opcao.grass {
+    background-color: var(--tipo-grass);
+}
+
+.opcao-filtro input:checked + .botao-opcao.electric {
+    background-color: var(--tipo-electric);
+}
+
+.opcao-filtro input:checked + .botao-opcao.ice {
+    background-color: var(--tipo-ice);
+}
+
+.opcao-filtro input:checked + .botao-opcao.fighting {
+    background-color: var(--tipo-fighting);
+}
+
+.opcao-filtro input:checked + .botao-opcao.poison {
+    background-color: var(--tipo-poison);
+}
+
+.opcao-filtro input:checked + .botao-opcao.ground {
+    background-color: var(--tipo-ground);
+}
+
+.opcao-filtro input:checked + .botao-opcao.flying {
+    background-color: var(--tipo-flying);
+}
+
+.opcao-filtro input:checked + .botao-opcao.psychic {
+    background-color: var(--tipo-psychic);
+}
+
+.opcao-filtro input:checked + .botao-opcao.bug {
+    background-color: var(--tipo-bug);
+}
+
+.opcao-filtro input:checked + .botao-opcao.rock {
+    background-color: var(--tipo-rock);
+}
+
+.opcao-filtro input:checked + .botao-opcao.ghost {
+    background-color: var(--tipo-ghost);
+}
+
+.opcao-filtro input:checked + .botao-opcao.dragon {
+    background-color: var(--tipo-dragon);
+}
+
+.opcao-filtro input:checked + .botao-opcao.dark {
+    background-color: var(--tipo-dark);
+}
+
+.opcao-filtro input:checked + .botao-opcao.steel {
+    background-color: var(--tipo-steel);
+}
+
+.opcao-filtro input:checked + .botao-opcao.fairy {
+    background-color: var(--tipo-fairy);
+}
+
+
+/* ==========================================================
+   Regiões
+========================================================== */
+
+.opcao-filtro input:checked + .botao-opcao.regiao {
+    background-color: var(--cor-regiao);
+}
+
+/* ==========================================================
+   Botão de ação
+========================================================== */
+
+.botao-filtrar {
+    background: var(--cor-botao-filtrar);
+    min-height: var(--altura-input);
+}
+
+.botao-filtrar:hover {
+    background-color: var(--cor-botao-filtrar-hover);
+    transform: scale(1.03);
+    /* transform:translateY(-3px); */
+}
+
+
+/* ==========================================================
+   Modo escuro
+========================================================== */
+
+.modo-escuro .filtros {
+    background-color: var(--cor-painel-filtros-escuro);
+}
+
+.modo-escuro .pesquisa-pokemon {
+    background-color: var(--cor-input-escuro);
+    color: var(--cor-texto-escuro);
+}
+
+
+/* ==========================================================
+   Responsividade
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .botao-opcao {
+        font-size: 12px;
+    }
+
+    .filtros {
+        padding: 15px;
+    }
+
+}
