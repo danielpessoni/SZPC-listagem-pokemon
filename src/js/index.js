@@ -477,36 +477,51 @@ botaoAlterarTema.addEventListener("click", () => {
 // INICIALIZAÇÃO
 // ==========================================================
 
+function obterRegioesSelecionadas() {
+	return [...document.querySelectorAll(".filtro-regiao:checked")]
+		.map(item => item.value);
+}
+
+async function pesquisarPorRegioes() {
+	const listaPokemon = document.getElementById("lista-pokemon");
+	listaPokemon.innerHTML = "";
+
+	const regioes = obterRegioesSelecionadas();
+
+	if (!regioes.length) return;
+
+	const pokemons = [];
+
+	for (const regiao of regioes) {
+		const resultado = await consultarPorRegiao(regiao);
+		pokemons.push(...resultado);
+	}
+
+	const ids = new Set();
+
+	pokemons.forEach(pokemon => {
+		if (ids.has(pokemon.id)) return;
+		ids.add(pokemon.id);
+		exibirPokemon(pokemon);
+	});
+}
+
+
 async function iniciar() {
-
 	try {
-
 		await carregarMenu();
 
-		const pokemons = await consultarPorRegiao();
+		document.querySelectorAll(".filtro-regiao").forEach((checkbox) => {
+			checkbox.addEventListener("change", pesquisarPorRegioes);
+		});
 
-		pokemons.forEach(
-			(pokemon) => {
-				exibirPokemon(pokemon);
-			}
-		);
+		await pesquisarPorRegioes();
 
 	} catch (erro) {
-
 		console.error(
 			"Erro ao carregar aplicação:",
 			erro
 		);
-
 	}
-
 }
-
 iniciar();
-
-window.testeCache = {
-	inspecionar,
-	consultarPorRegiao,
-	obter,
-	cache
-};
