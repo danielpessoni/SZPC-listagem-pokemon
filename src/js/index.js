@@ -351,24 +351,26 @@ async function carregarRegioes() {
 
 	listaRegioes.innerHTML = "";
 
-	resposta.results.forEach(
-		(regiao, indice) => {
+	for (const regiaoResumo of resposta.results) {
 
-			listaRegioes.appendChild(
-				criarOpcao({
-					classe: "regiao",
-					grupo: "filtro-regiao",
-					valor: regiao.name,
-					texto:
-						regiao.name.charAt(0).toUpperCase() +
-						regiao.name.slice(1),
-					marcado: regiao.name === "kanto",
-					ultimo:
-						indice === resposta.results.length - 1
-				})
-			);
+		const regiao = await buscarRegiao(regiaoResumo.name);
+
+		if (regiao.pokedexes.length === 0) {
+			continue;
 		}
-	);
+
+		listaRegioes.appendChild(
+			criarOpcao({
+				classe: "regiao",
+				grupo: "filtro-regiao",
+				valor: regiao.name,
+				texto:
+					regiao.name.charAt(0).toUpperCase() +
+					regiao.name.slice(1),
+				marcado: regiao.name === "kanto"
+			})
+		);
+	}
 }
 
 async function carregarTipos() {
