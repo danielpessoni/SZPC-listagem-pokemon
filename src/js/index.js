@@ -190,32 +190,49 @@ function extrairId(url) {
 	);
 }
 
-async function consultarPorRegiao(nomeRegiao = "sinnoh") {
+async function consultarPorPokedex(nomeRegiao) {
 	const chaveCache = `regiao:${nomeRegiao}`;
+
+	if (!existe(chaveCache)) {
+		const regiao = await buscarRegiao(nomeRegiao);
+
+		if (!regiao.pokedexes.length) {
+			return [];
+		}
+
+		const pokedexId = extrairId(regiao.pokedexes[0].url);
+		const pokedex = await buscarPokedex(pokedexId);
+
+		const pokemons = await obterPokemons(
+			pokedex.pokemon_entries.map(
+				(entry) => entry.pokemon_species.name
+			)
+		);
+
+		salvar(chaveCache, pokemons);
+	}
+
+	return obter(chaveCache);
+}
+
+async function consultarPorOrigem(nomeRegiao) {
+	const chaveCache = `origem:${nomeRegiao}`;
 
 	if (existe(chaveCache)) {
 		return obter(chaveCache);
 	}
 
-	const regiao = await buscarRegiao(nomeRegiao);
+	const pokemons = await consultarPorPokedex(nomeRegiao);
 
-	if (!regiao.pokedexes.length) {
-		return [];
-	}
-
-	const pokedexId = extrairId(regiao.pokedexes[0].url);
-	const pokedex = await buscarPokedex(pokedexId);
-
-	const pokemons = await obterPokemons(
-		pokedex.pokemon_entries.map(
-			(entry) => entry.pokemon_species.name
-		)
+	const originarios = pokemons.filter(
+		(pokemon) => pokemon.regioes.includes(nomeRegiao)
 	);
 
-	salvar(chaveCache, pokemons);
+	salvar(chaveCache, originarios);
 
-	return pokemons;
+	return originarios;
 }
+
 
 // ==========================================================
 // CONSULTA POR TIPO
@@ -485,22 +502,29 @@ function obterRegioesSelecionadas() {
 async function pesquisarPorRegioes() {
 	const listaPokemon = document.getElementById("lista-pokemon");
 	listaPokemon.innerHTML = "";
-
 	const regioes = obterRegioesSelecionadas();
 
-	if (!regioes.length) return;
+	if (!regioes.length) {
+		return;
+	}
 
 	const pokemons = [];
 
 	for (const regiao of regioes) {
-		const resultado = await consultarPorRegiao(regiao);
+		const resultado = document.getElementById("somente-origem").checked
+			? await consultarPorOrigem(regiao)
+			: await consultarPorPokedex(regiao);
+
 		pokemons.push(...resultado);
 	}
 
 	const ids = new Set();
 
-	pokemons.forEach(pokemon => {
-		if (ids.has(pokemon.id)) return;
+	pokemons.forEach((pokemon) => {
+		if (ids.has(pokemon.id)) {
+			return;
+		}
+
 		ids.add(pokemon.id);
 		exibirPokemon(pokemon);
 	});
@@ -524,4 +548,9 @@ async function iniciar() {
 		);
 	}
 }
+
+document.getElementById("somente-origem").addEventListener(
+	"change",
+	pesquisarPorRegioes
+);
 iniciar();
