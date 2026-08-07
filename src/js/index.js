@@ -596,6 +596,10 @@ async function pesquisarPorRegioes() {
 	const tiposSelecionados =
 		obterTiposSelecionados();
 
+	const exigirTodosTipos =
+		document.getElementById("tipos-obrigatorios")
+			.checked;
+
 	const pokemons = [];
 
 	for (const regiao of regioes) {
@@ -619,9 +623,13 @@ async function pesquisarPorRegioes() {
 	const filtradosPorTipo =
 		tiposSelecionados.length
 			? filtrados.filter((pokemon) =>
-				pokemon.tipos.some((tipo) =>
-					tiposSelecionados.includes(tipo)
-				)
+				exigirTodosTipos
+					? tiposSelecionados.every((tipo) =>
+						pokemon.tipos.includes(tipo)
+					)
+					: tiposSelecionados.some((tipo) =>
+						pokemon.tipos.includes(tipo)
+					)
 			)
 			: filtrados;
 
@@ -638,7 +646,6 @@ async function pesquisarPorRegioes() {
 		exibirPokemon(pokemon);
 
 	});
-
 }
 
 async function pesquisarPorNome() {
@@ -703,17 +710,6 @@ document.getElementById("somente-origem").addEventListener(
 	"change",
 	pesquisarPorRegioes
 );
-
-document
-	.querySelectorAll(".filtro-tipo")
-	.forEach((checkbox) => {
-
-		checkbox.addEventListener(
-			"change",
-			pesquisarPorRegioes
-		);
-
-	});
 
 document.querySelectorAll(".filtro-tipo")
 	.forEach((checkbox) => {
