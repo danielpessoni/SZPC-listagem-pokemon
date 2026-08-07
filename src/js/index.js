@@ -301,8 +301,6 @@ async function pesquisarPokemonPorNome(nome) {
 		}
 	}
 
-	// Não encontrou.
-	// Tenta diretamente na API.
 	try {
 		return await obterPokemon(pesquisa);
 	}
@@ -667,7 +665,6 @@ async function pesquisarPorNome() {
 		return;
 	}
 
-	// Marca apenas a região de origem
 	document
 		.querySelectorAll(".filtro-regiao")
 		.forEach((checkbox) => {
@@ -677,7 +674,6 @@ async function pesquisarPorNome() {
 
 		});
 
-	// Atualiza a listagem daquela região
 	await pesquisarPorRegioes();
 }
 
