@@ -1,8 +1,11 @@
+const URL_BASE_API = "https://pokeapi.co/api/v2";
+
+const IDIOMA_PADRAO = "pt-BR";
+const IDIOMA_FALLBACK = "en";
+
 // ==========================================================
 // API
 // ==========================================================
-
-const URL_BASE_API = "https://pokeapi.co/api/v2";
 
 async function buscarDados(url) {
 	const resposta = await fetch(url);
@@ -267,18 +270,47 @@ async function consultarPorTipo(tipo) {
 // CONSULTA POR NOME
 // ==========================================================
 
-function consultarPorNome(nome) {
+async function pesquisarPokemonPorNome(nome) {
+
 	if (!nome || nome.trim() === "") {
-		return [];
+		return null;
 	}
 
-	return [
-		nome
-			.trim()
-			.toLowerCase()
-	];
-}
+	const pesquisa = nome
+		.trim()
+		.toLowerCase()
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "");
 
+	// Procura primeiro em todo o cache
+	for (const valor of cache.values()) {
+
+		if (!Array.isArray(valor)) {
+			continue;
+		}
+
+		const encontrado = valor.find((pokemon) =>
+			obterNomePesquisa(pokemon)
+				.some((nomePokemon) =>
+					nomePokemon.includes(pesquisa)
+				)
+		);
+
+		if (encontrado) {
+			return encontrado;
+		}
+	}
+
+	// Não encontrou.
+	// Tenta diretamente na API.
+	try {
+		return await obterPokemon(pesquisa);
+	}
+
+	catch {
+		return null;
+	}
+}
 
 // ==========================================================
 // INTERSEÇÃO DE FILTROS
@@ -429,6 +461,30 @@ function obterDescricaoPokemon(pokemon, idioma = "en") {
 	return pokemon.descricoes[idioma] ?? pokemon.descricoes.en;
 }
 
+function obterNomePesquisa(pokemon) {
+	const nomes = pokemon.nomes;
+
+	const nomePrincipal =
+		nomes[IDIOMA_PADRAO] ??
+		nomes[IDIOMA_FALLBACK] ??
+		"";
+
+	const nomeIngles =
+		nomes[IDIOMA_FALLBACK] ??
+		"";
+
+	return [
+		nomePrincipal,
+		nomeIngles
+	]
+		.map((nome) =>
+			nome
+				.toLowerCase()
+				.normalize("NFD")
+				.replace(/[\u0300-\u036f]/g, "")
+		);
+}
+
 function criarCardPokemon(pokemon, idioma = "en") {
 	const modeloCard = document.getElementById("modelo-card-pokemon");
 	const card = modeloCard.content.cloneNode(true);
@@ -505,24 +561,42 @@ async function pesquisarPorRegioes() {
 	const listaPokemon = document.getElementById("lista-pokemon");
 	listaPokemon.innerHTML = "";
 	const regioes = obterRegioesSelecionadas();
-
 	if (!regioes.length) {
 		return;
 	}
 
+	const somenteOrigem =
+		document.getElementById("somente-origem").checked;
+
+	const nome =
+		document.getElementById("filtro-nome").value
+			.trim()
+			.toLowerCase();
+
 	const pokemons = [];
 
 	for (const regiao of regioes) {
-		const resultado = document.getElementById("somente-origem").checked
+
+		const resultado = somenteOrigem
 			? await consultarPorOrigem(regiao)
 			: await consultarPorPokedex(regiao);
 
 		pokemons.push(...resultado);
 	}
 
+	const filtrados = nome
+		? pokemons.filter((pokemon) =>
+			obterNomePesquisa(pokemon)
+				.some((nomePokemon) =>
+					nomePokemon.includes(nome)
+				)
+		)
+		: pokemons;
+
 	const ids = new Set();
 
-	pokemons.forEach((pokemon) => {
+	filtrados.forEach((pokemon) => {
+
 		if (ids.has(pokemon.id)) {
 			return;
 		}
@@ -530,6 +604,39 @@ async function pesquisarPorRegioes() {
 		ids.add(pokemon.id);
 		exibirPokemon(pokemon);
 	});
+}
+
+async function pesquisarPorNome() {
+
+	const nome = campoPesquisa.value.trim();
+
+	if (!nome) {
+		await pesquisarPorRegioes();
+		return;
+	}
+
+	const pokemon =
+		await pesquisarPokemonPorNome(nome);
+
+	if (!pokemon) {
+
+		console.log("Nenhum Pokémon encontrado");
+
+		return;
+	}
+
+	// Marca apenas a região de origem
+	document
+		.querySelectorAll(".filtro-regiao")
+		.forEach((checkbox) => {
+
+			checkbox.checked =
+				checkbox.value === pokemon.regioes[0];
+
+		});
+
+	// Atualiza a listagem daquela região
+	await pesquisarPorRegioes();
 }
 
 
@@ -555,4 +662,23 @@ document.getElementById("somente-origem").addEventListener(
 	"change",
 	pesquisarPorRegioes
 );
+
+
+const botaoPesquisar = document.getElementById("botao-pesquisar");
+const campoPesquisa = document.getElementById("filtro-nome");
+
+
+botaoPesquisar.addEventListener(
+	"click",
+	pesquisarPorNome
+);
+
+campoPesquisa.addEventListener("keydown", (evento) => {
+
+	if (evento.key === "Enter") {
+		pesquisarPorNome();
+	}
+
+});
+
 iniciar();
