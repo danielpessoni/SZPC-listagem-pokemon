@@ -552,15 +552,34 @@ botaoAlterarTema.addEventListener("click", () => {
 // INICIALIZAÇÃO
 // ==========================================================
 
+function obterTiposSelecionados() {
+
+	return [
+		...document.querySelectorAll(
+			".filtro-tipo:checked"
+		)
+	].map(
+		(item) => item.value
+	);
+
+}
+
+
 function obterRegioesSelecionadas() {
 	return [...document.querySelectorAll(".filtro-regiao:checked")]
 		.map(item => item.value);
 }
 
 async function pesquisarPorRegioes() {
-	const listaPokemon = document.getElementById("lista-pokemon");
+
+	const listaPokemon =
+		document.getElementById("lista-pokemon");
+
 	listaPokemon.innerHTML = "";
-	const regioes = obterRegioesSelecionadas();
+
+	const regioes =
+		obterRegioesSelecionadas();
+
 	if (!regioes.length) {
 		return;
 	}
@@ -569,9 +588,13 @@ async function pesquisarPorRegioes() {
 		document.getElementById("somente-origem").checked;
 
 	const nome =
-		document.getElementById("filtro-nome").value
+		document.getElementById("filtro-nome")
+			.value
 			.trim()
 			.toLowerCase();
+
+	const tiposSelecionados =
+		obterTiposSelecionados();
 
 	const pokemons = [];
 
@@ -593,17 +616,29 @@ async function pesquisarPorRegioes() {
 		)
 		: pokemons;
 
+	const filtradosPorTipo =
+		tiposSelecionados.length
+			? filtrados.filter((pokemon) =>
+				pokemon.tipos.some((tipo) =>
+					tiposSelecionados.includes(tipo)
+				)
+			)
+			: filtrados;
+
 	const ids = new Set();
 
-	filtrados.forEach((pokemon) => {
+	filtradosPorTipo.forEach((pokemon) => {
 
 		if (ids.has(pokemon.id)) {
 			return;
 		}
 
 		ids.add(pokemon.id);
+
 		exibirPokemon(pokemon);
+
 	});
+
 }
 
 async function pesquisarPorNome() {
@@ -647,6 +682,12 @@ async function iniciar() {
 		document.querySelectorAll(".filtro-regiao").forEach((checkbox) => {
 			checkbox.addEventListener("change", pesquisarPorRegioes);
 		});
+		document.querySelectorAll(".filtro-tipo").forEach((checkbox) => {
+			checkbox.addEventListener(
+				"change",
+				pesquisarPorRegioes
+			);
+		});
 
 		await pesquisarPorRegioes();
 
@@ -662,6 +703,32 @@ document.getElementById("somente-origem").addEventListener(
 	"change",
 	pesquisarPorRegioes
 );
+
+document
+	.querySelectorAll(".filtro-tipo")
+	.forEach((checkbox) => {
+
+		checkbox.addEventListener(
+			"change",
+			pesquisarPorRegioes
+		);
+
+	});
+
+document.querySelectorAll(".filtro-tipo")
+	.forEach((checkbox) => {
+		checkbox.addEventListener(
+			"change",
+			pesquisarPorRegioes
+		);
+	});
+
+document
+	.getElementById("tipos-obrigatorios")
+	.addEventListener(
+		"change",
+		pesquisarPorRegioes
+	);
 
 
 const botaoPesquisar = document.getElementById("botao-pesquisar");
