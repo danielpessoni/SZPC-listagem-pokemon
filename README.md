@@ -58,6 +58,16 @@ Cada Pokémon exibido apresenta:
 
 ---
 
+### ⏳ Indicadores de carregamento
+
+* Exibe uma tela inicial com fundo vermelho e uma Pokébola pulsante enquanto os filtros de regiões e tipos são carregados.
+* Mostra um indicador na listagem durante as consultas de Pokémon, inclusive na consulta inicial.
+* Desativa e reduz visualmente a opacidade dos controles de filtro enquanto uma consulta está em andamento.
+* Apresenta mensagens na listagem quando ocorre uma falha ao carregar os filtros ou Pokémon.
+* Respeita a preferência do sistema por movimento reduzido.
+
+---
+
 ## ⚙️ Recursos técnicos
 
 ### Consumo de API
@@ -105,7 +115,19 @@ A interface é construída dinamicamente utilizando JavaScript puro:
 * Criação dos filtros de região e tipo;
 * Renderização dos cards através de `<template>`;
 * Controle de eventos;
-* Atualização dos resultados conforme os filtros selecionados.
+* Atualização dos resultados conforme os filtros selecionados;
+* Atualização dos indicadores de carregamento e bloqueio temporário dos controles durante consultas.
+
+---
+
+### Carregamento e feedback visual
+
+Os estados de carregamento são controlados em `src/js/loading.js` e estilizados em `src/css/loading.css`.
+
+* A tela global permanece visível até que os filtros estejam prontos.
+* A listagem apresenta um indicador independente enquanto os Pokémon da seleção atual são consultados.
+* A duração de um ciclo completo da animação da Pokébola é configurada pela variável CSS `--duracao-loading-pokebola`, definida como `2s`.
+* A animação é removida quando o usuário prefere movimento reduzido no sistema.
 
 ---
 
@@ -161,6 +183,7 @@ Aplicação desenvolvida sem frameworks, utilizando:
 │   ├── css/
 │   │   ├── base.css
 │   │   ├── filtros.css
+│   │   ├── loading.css
 │   │   ├── pokemon.css
 │   │   ├── reset.css
 │   │   ├── scrollbar.css
@@ -169,6 +192,7 @@ Aplicação desenvolvida sem frameworks, utilizando:
 │   ├── imagens/
 │   │
 │   └── js/
+│       ├── loading.js
 │       └── index.js
 ```
 
