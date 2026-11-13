@@ -1,0 +1,113 @@
+/* Altere esta variável para mudar a duração de um ciclo completo da animação. */
+:root {
+	--duracao-loading-pokebola: 2s;
+}
+
+/* A sobreposição inicial cobre a página enquanto os filtros são montados. */
+.loading-tela {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #CB1F19;
+	color: #ffffff;
+}
+
+.loading-tela[hidden] {
+	display: none;
+}
+
+.loading-tela__conteudo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.loading-tela__pokebola {
+	width: 96px;
+	height: 96px;
+	object-fit: contain;
+	animation: pulsar-pokebola var(--duracao-loading-pokebola) ease-in-out infinite;
+}
+
+/* O ciclo completo dura 2s: um segundo para cada transição de opacidade. */
+@keyframes pulsar-pokebola {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.1;
+	}
+}
+
+/* O indicador ocupa a lista enquanto os dados da seleção atual são consultados. */
+.loading-pokemon {
+	display: flex;
+	flex: 1 0 100%;
+	min-height: 180px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	color: inherit;
+}
+
+.loading-pokemon__pokebola {
+	width: 56px;
+	height: 56px;
+	object-fit: contain;
+	animation: pulsar-pokebola var(--duracao-loading-pokebola) ease-in-out infinite;
+}
+
+.mensagem-listagem {
+	flex: 1 0 100%;
+	padding: 24px;
+	text-align: center;
+}
+
+/* Os filtros bloqueados ficam apagados e não reagem ao passar do mouse. */
+.opcao-filtro--desativada {
+	cursor: not-allowed;
+}
+
+.opcao-filtro--desativada .botao-opcao {
+	cursor: not-allowed;
+	filter: grayscale(1);
+	opacity: 0.5;
+}
+
+.opcao-filtro--desativada:hover .botao-opcao,
+.opcao-filtro--desativada input:checked + .botao-opcao {
+	transform: none;
+}
+
+.opcao-extra--desativada {
+	cursor: not-allowed;
+	opacity: 0.55;
+}
+
+.pesquisa-pokemon:disabled,
+.botao-filtrar:disabled {
+	cursor: not-allowed;
+	filter: grayscale(1);
+	opacity: 0.55;
+}
+
+.botao-filtrar:disabled:hover {
+	transform: none;
+}
+
+/* Mantém a marca visível sem movimento para quem prefere animações reduzidas. */
+@media (prefers-reduced-motion: reduce) {
+	.loading-tela__pokebola,
+	.loading-pokemon__pokebola {
+		animation: none;
+	}
+}

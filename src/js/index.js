@@ -1,3 +1,11 @@
+import {
+	bloquearControlesConsulta,
+	esconderLoadingPokemon,
+	esconderLoadingTela,
+	mostrarErroPokemon,
+	mostrarLoadingPokemon
+} from "./loading.js";
+
 const URL_BASE_API = "https://pokeapi.co/api/v2";
 
 const IDIOMA_PADRAO = "pt-BR";
@@ -570,17 +578,20 @@ function obterRegioesSelecionadas() {
 
 async function pesquisarPorRegioes() {
 
-	const listaPokemon =
-		document.getElementById("lista-pokemon");
-
-	listaPokemon.innerHTML = "";
-
 	const regioes =
 		obterRegioesSelecionadas();
 
 	if (!regioes.length) {
+		document.getElementById("lista-pokemon").replaceChildren();
 		return;
 	}
+
+	await executarConsulta(() => carregarPokemonsFiltrados());
+}
+
+async function carregarPokemonsFiltrados() {
+	const regioes =
+		obterRegioesSelecionadas();
 
 	const somenteOrigem =
 		document.getElementById("somente-origem").checked;
@@ -647,40 +658,67 @@ async function pesquisarPorRegioes() {
 }
 
 async function pesquisarPorNome() {
+	await executarConsulta(async () => {
+		const nome = campoPesquisa.value.trim();
 
-	const nome = campoPesquisa.value.trim();
+		if (!nome) {
+			await carregarPokemonsFiltrados();
+			return;
+		}
 
-	if (!nome) {
-		await pesquisarPorRegioes();
-		return;
-	}
+		const pokemon =
+			await pesquisarPokemonPorNome(nome);
 
-	const pokemon =
-		await pesquisarPokemonPorNome(nome);
+		if (!pokemon) {
+			mostrarErroPokemon("Nenhum Pokémon encontrado.");
+			return;
+		}
 
-	if (!pokemon) {
+		document
+			.querySelectorAll(".filtro-regiao")
+			.forEach((checkbox) => {
+				checkbox.checked =
+					checkbox.value === pokemon.regioes[0];
+			});
 
-		console.log("Nenhum Pokémon encontrado");
-
-		return;
-	}
-
-	document
-		.querySelectorAll(".filtro-regiao")
-		.forEach((checkbox) => {
-
-			checkbox.checked =
-				checkbox.value === pokemon.regioes[0];
-
-		});
-
-	await pesquisarPorRegioes();
+		await carregarPokemonsFiltrados();
+	});
 }
 
+// Um único fluxo de carregamento evita buscas concorrentes e cards fora de ordem.
+let consultaEmAndamento = false;
+
+async function executarConsulta(consulta) {
+	if (consultaEmAndamento) {
+		return;
+	}
+
+	consultaEmAndamento = true;
+	bloquearControlesConsulta(true);
+	mostrarLoadingPokemon();
+
+	try {
+		await consulta();
+	} catch (erro) {
+		console.error("Erro ao consultar Pokémon:", erro);
+		mostrarErroPokemon(
+			"Não foi possível carregar os Pokémon. Tente novamente."
+		);
+	} finally {
+		esconderLoadingPokemon();
+		bloquearControlesConsulta(false);
+		consultaEmAndamento = false;
+	}
+}
 
 async function iniciar() {
+	// Impede interações por teclado enquanto o menu ainda está sendo carregado.
+	bloquearControlesConsulta(true);
+
 	try {
 		await carregarMenu();
+		// O menu recria os checkboxes; bloqueia também os elementos recém-criados.
+		bloquearControlesConsulta(true);
 
 		document.querySelectorAll(".filtro-regiao").forEach((checkbox) => {
 			checkbox.addEventListener("change", pesquisarPorRegioes);
@@ -692,12 +730,19 @@ async function iniciar() {
 			);
 		});
 
+		// A lista tem seu próprio indicador; a tela global cobre apenas os filtros.
+		esconderLoadingTela();
 		await pesquisarPorRegioes();
 
 	} catch (erro) {
 		console.error(
 			"Erro ao carregar aplicação:",
 			erro
+		);
+		bloquearControlesConsulta(true);
+		esconderLoadingTela();
+		mostrarErroPokemon(
+			"Não foi possível carregar os filtros. Recarregue a página para tentar novamente."
 		);
 	}
 }

@@ -21,12 +21,21 @@
     <link rel="stylesheet" href="./src/css/base.css">
     <link rel="stylesheet" href="./src/css/filtros.css">
     <link rel="stylesheet" href="./src/css/pokemon.css">
+    <link rel="stylesheet" href="./src/css/loading.css">
 
     <link rel="shortcut icon" href="src/imagens/pokeball.png" type="image/x-icon">
 
 </head>
 
 <body>
+    <!-- A sobreposição inicial evita exibir a interface parcialmente montada. -->
+    <div id="loading-tela" class="loading-tela" role="status" aria-live="polite">
+        <div class="loading-tela__conteudo">
+            <img src="./src/imagens/pokeball.png" alt="" class="loading-tela__pokebola">
+            <p>Loading</p>
+        </div>
+    </div>
+
     <header>
 
         <a href="#">
